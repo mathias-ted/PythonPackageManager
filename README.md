@@ -1,5 +1,8 @@
-PythonPackageManager
-A lightweight GUI-based Python package manager built on top of pip,
+![PythonPackageManager logo](assets/logo.svg)
+
+# PythonPackageManager
+
+A lightweight GUI-based Python package manager built on top of pip,  
 It allows you to install, update, and uninstall Python packages.
 
 🚀 Features
@@ -12,10 +15,8 @@ It allows you to install, update, and uninstall Python packages.
 
 .🖥️ Simple GUI interface
 
-
-
 ▶️ Usage
 
 Run Application
- 
+
 python main.py
