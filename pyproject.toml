@@ -1,0 +1,19 @@
+[project]
+name = "pkgr"
+version = "0.1.0"
+description = "GUI package manager for Python "
+requires-python = ">=3.10"
+dependencies = [
+    "customtkinter>=5.2.2",
+    "uv>=0.1.0",
+]
+
+[project.scripts]
+pkgr = "pkgr.main:main"
+
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
