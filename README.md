@@ -1,8 +1,7 @@
 
 # PythonPackageManager
 
-A lightweight GUI-based Python package manager built on top of pip,  
-It allows you to install, update, and uninstall Python packages.
+A lightweight GUI-based Python package manager that allows you to install, update, and uninstall Python packages.
 
 🚀 Features
 
@@ -20,7 +19,13 @@ It allows you to install, update, and uninstall Python packages.
 <img width="744" height="583" alt="sample 1" src="https://github.com/user-attachments/assets/85496f94-1a05-4b54-a47a-a779d4d39e60" />
 
 
+# Installing
 
+Run 
+
+```sh
+uv pip install -e.
+```
 
 
 ▶️ Usage
@@ -28,5 +33,5 @@ It allows you to install, update, and uninstall Python packages.
 Run Application
 
 ```sh
-python main.py
+uv run pkgr
 ```
