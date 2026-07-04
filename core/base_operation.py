@@ -1,4 +1,4 @@
-from core.package_manager import PackageManager
+from pkgr.core.package_manager import PackageManager
 
 
 class Operations:
@@ -70,6 +70,5 @@ class Operations:
         else:
             self.update_status_ui(message, "error")
             self.show_err_win(f"Failed to {self.operation}'{self.name}'\n{message}")
-        
-        self.update_status("Ready to manage packages", "info")
 
+        self.update_status("Ready to manage packages", "info")
