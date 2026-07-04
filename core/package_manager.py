@@ -8,8 +8,6 @@ import re
 logger = logging.getLogger(__name__)
 
 
-
-
 class PackageManager:
     """Handles package management operations."""
 
@@ -66,7 +64,6 @@ class PackageManager:
         """
 
         cmd = [sys.executable, "-m", "pip", "show", pkg_name]
-        
 
         success, stdout, stderr = PackageManager.run_pip_command(cmd)
         if success:
@@ -84,7 +81,7 @@ class PackageManager:
 
         """
 
-        cmd = [sys.executable, "-m", "pip", "list", "--format=json"]
+        cmd = ["uv", "pip", "list", "--format=json"]
 
         success, stdout, stderr = PackageManager.run_pip_command(cmd)
 
@@ -148,7 +145,7 @@ class PackageManager:
             bool: True if successful, False otherwise
         """
 
-        cmd = [sys.executable, "-m", "pip", "install", package_name]
+        cmd = [sys.executable, "-m", "uv","pip", "install", package_name]
 
         success, stdout, stderr = PackageManager.run_pip_command(cmd)
 
@@ -170,7 +167,7 @@ class PackageManager:
             bool: True if successful, False otherwise
         """
 
-        cmd = [sys.executable, "-m", "pip", "uninstall", package_name, "--yes"]
+        cmd = [sys.executable, "-m", "uv","pip", "uninstall", package_name, "--yes"]
 
         success, stdout, stderr = PackageManager.run_pip_command(cmd)
 
@@ -200,6 +197,7 @@ class PackageManager:
         cmd_upgrade = [
             sys.executable,
             "-m",
+            "uv"
             "pip",
             "install",
             "--upgrade",
@@ -227,7 +225,7 @@ class PackageManager:
 
 
         """
-        cmd = [sys.executable, "-m", "pip", "show", package_name]
+        cmd = ["uv", "pip", "show", package_name]
 
         success, stdout, stderr = PackageManager.run_pip_command(cmd)
 
@@ -247,11 +245,11 @@ class PackageManager:
             logger.error(f"Value error parsing package details:{e}")
             return False
         except Exception as e:
-            logger.error(f"Error parsin package details:{e}")
+            logger.error(f"Error parsing package details:{e}")
             return False
 
     @staticmethod
-    def check_package_version(package_name) -> tuple[bool,str]:
+    def check_package_version(package_name) -> tuple[bool, str]:
         cmd_version = [sys.executable, "-m", "pip", "index", "versions", package_name]
 
         # check if the latest version is already installed
@@ -270,6 +268,8 @@ class PackageManager:
             latest_version = latest_match.group(1)
 
             if installed_version != latest_version:
-                return True,""
+                return True, ""
             else:
-                return False,""
+                return False, ""
+        
+        return False,""
