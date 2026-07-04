@@ -21,7 +21,8 @@ from tkinter import ttk
 from tkinter import messagebox, Menu
 
 
-from core.package_manager import PackageManager
+from pkgr.core.package_manager import PackageManager
+
 
 
 class PackageWindow:
