@@ -1,13 +1,13 @@
 import customtkinter
-from gui.packages_window import PackageWindow
-from core.package_manager import PackageManager
+from pkgr.gui.packages_window import PackageWindow
+from pkgr.core.package_manager import PackageManager
 
 from tkinter import messagebox
 
 import threading
 
 import functools
-from core.base_operation import Operations
+from pkgr.core.base_operation import Operations
 
 
 class PackageManagerApp(customtkinter.CTk):
