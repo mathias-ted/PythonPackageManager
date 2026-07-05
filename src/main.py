@@ -1,6 +1,6 @@
 import logging
 
-from gui.main_window import PackageManagerApp
+from pkgr.gui.main_window import PackageManagerApp
 
 from tkinter import messagebox
 
