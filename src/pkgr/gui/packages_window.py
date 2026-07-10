@@ -3,7 +3,7 @@ import os
 import subprocess
 import threading
 import platform
-
+from pathlib import Path
 
 from customtkinter import (
     StringVar,
@@ -22,7 +22,6 @@ from tkinter import messagebox, Menu
 
 
 from pkgr.core.package_manager import PackageManager
-
 
 
 class PackageWindow:
@@ -299,30 +298,33 @@ class PackageWindow:
 
         name = self.get_selected_package()
 
-        if not name or not self.package_folder:
+        if not name:
             return
 
-        folder_path = name.replace("-", "_") if "-" in name else name
-        full_path = os.path.join(self.package_folder, folder_path)
+        package_details = PackageManager.get_packages_details(name)
 
-        if not os.path.exists(full_path):
+        location = package_details.get("Location", None)
+
+        if not location:
+            return
+
+        pkg_path = os.path.join(location.strip(), name)
+
+        if not os.path.exists(pkg_path):
             messagebox.showerror(
-                "⚠️ Warning", f"Package directory not found:\n{full_path}"
+                "⚠️ Warning", f"Package directory not found:\n{pkg_path}"
             )
             return
 
         try:
-            if platform.system() == "Windows":  # windows
-                subprocess.Popen(f"explorer /select , {full_path}")
-            elif platform.system() == "Darwin":
-                subprocess.Popen(["open", "-R", full_path])
+            if platform.system() == "Windows":
+                subprocess.Popen(f'explorer /select,"{pkg_path}"')
+            elif platform.system() == "Darwin":  # macOS
+                subprocess.Popen(["open", "-R", str(pkg_path)])
             elif platform.system() == "Linux":
-                subprocess.Popen(["xdg-open", full_path])
-
+                subprocess.Popen(["xdg-open", str(pkg_path)])
         except Exception as e:
-            messagebox.showerror(
-                "❌ Error", f"Failed to open package location: {str(e)}"
-            )
+            messagebox.showerror("Error", f"Failed to open directory:\n{e}")
 
     def uninstall_from_menu(self):
         """Uninstall package from context menu"""
