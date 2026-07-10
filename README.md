@@ -16,24 +16,34 @@ A lightweight GUI-based Python package manager that allows you to install, updat
 
 ## 📦 Installing
 
-Clone the repository:
+**Prerequisite:** `pkgr` requires [`uv`](https://docs.astral.sh/uv/) to already be installed on your system,This applies whether you're running `pkgr` inside a virtual environment or globally — either way, `uv` needs to be reachable on your PATH. See the [uv installation guide](https://docs.astral.sh/uv/getting-started/installation/) if you don't have it yet.
+
+Install `pkgr` as a CLI tool directly from GitHub:
+
+```sh
+uv tool install git+https://github.com/mathias-ted/PythonPackageManager
+```
+
+This installs `pkgr` in an isolated environment managed by `uv` and makes it available globally — no manual cloning or virtual environment activation needed.
+
+### Developing / contributing
+
+If you want to modify the source instead:
 
 ```sh
 git clone https://github.com/mathias-ted/PythonPackageManager
+cd PythonPackageManager
+uv run pkgr
 ```
 
-Install in editable mode:
-
-```sh
-uv pip install -e .
-```
+`uv run` automatically creates a `.venv`, installs the project in editable mode, and resolves dependencies — no separate install step required.
 
 ## ▶️ Usage
 
 Run the application:
 
 ```sh
-uv run pkgr
+pkgr
 ```
 
 **Note:** `pkgr` detects its execution context automatically:
