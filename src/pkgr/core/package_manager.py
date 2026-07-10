@@ -3,7 +3,7 @@ import json
 import logging
 import sys
 import re
-
+from typing import Any,Dict
 
 logger = logging.getLogger(__name__)
 
@@ -211,7 +211,7 @@ class PackageManager:
             return False, stderr
 
     @staticmethod
-    def get_packages_details(package_name):
+    def get_packages_details(package_name)-> Dict:
         """
         Retrieve details about a package
 
@@ -228,25 +228,26 @@ class PackageManager:
         cmd = ["uv", "pip", "show", package_name]
 
         success, stdout, stderr = PackageManager.run_pip_command(cmd)
+        details = {}
 
         if not success:
             logger.error(f"Error getting package details: {stderr}")
-            return False
+            return details
 
-        details = {}
+       
 
         try:
             for line in stdout.splitlines():
                 key, value = line.split(":", 1)
                 details[key] = value
 
-            return details if details else False
+            return details 
         except ValueError as e:
             logger.error(f"Value error parsing package details:{e}")
-            return False
+            return details
         except Exception as e:
             logger.error(f"Error parsing package details:{e}")
-            return False
+            return details
 
     @staticmethod
     def check_package_version(package_name) -> tuple[bool, str]:
