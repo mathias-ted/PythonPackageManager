@@ -3,7 +3,7 @@ import json
 import logging
 import sys
 import re
-from typing import Any,Dict
+from typing import Any, Dict
 
 logger = logging.getLogger(__name__)
 
@@ -63,7 +63,7 @@ class PackageManager:
             Tuple: True if package is installed, False otherwise
         """
 
-        cmd = [sys.executable, "-m", "pip", "show", pkg_name]
+        cmd = ["uv", "pip", "show", pkg_name]
 
         success, stdout, stderr = PackageManager.run_pip_command(cmd)
         if success:
@@ -110,7 +110,7 @@ class PackageManager:
             List of tuples containing (package_name, current_version, latest_version)
         """
 
-        cmd = [sys.executable, "-m", "uv", "pip", "list", "--outdated", "--format=json"]
+        cmd = ["uv", "pip", "list", "--outdated", "--format=json"]
 
         success, stdout, stderr = PackageManager.run_pip_command(cmd)
 
@@ -145,7 +145,7 @@ class PackageManager:
             bool: True if successful, False otherwise
         """
 
-        cmd = [sys.executable, "-m", "uv","pip", "install", package_name]
+        cmd = ["uv", "pip", "install", package_name]
 
         success, stdout, stderr = PackageManager.run_pip_command(cmd)
 
@@ -167,7 +167,7 @@ class PackageManager:
             bool: True if successful, False otherwise
         """
 
-        cmd = [sys.executable, "-m", "uv","pip", "uninstall", package_name, "--yes"]
+        cmd = ["uv", "pip", "uninstall", package_name, "--yes"]
 
         success, stdout, stderr = PackageManager.run_pip_command(cmd)
 
@@ -195,9 +195,7 @@ class PackageManager:
         """
 
         cmd_upgrade = [
-            sys.executable,
-            "-m",
-            "uv"
+            "uv",
             "pip",
             "install",
             "--upgrade",
@@ -211,7 +209,7 @@ class PackageManager:
             return False, stderr
 
     @staticmethod
-    def get_packages_details(package_name)-> Dict:
+    def get_packages_details(package_name) -> Dict:
         """
         Retrieve details about a package
 
@@ -234,14 +232,12 @@ class PackageManager:
             logger.error(f"Error getting package details: {stderr}")
             return details
 
-       
-
         try:
             for line in stdout.splitlines():
                 key, value = line.split(":", 1)
                 details[key] = value
 
-            return details 
+            return details
         except ValueError as e:
             logger.error(f"Value error parsing package details:{e}")
             return details
@@ -251,7 +247,7 @@ class PackageManager:
 
     @staticmethod
     def check_package_version(package_name) -> tuple[bool, str]:
-        cmd_version = [sys.executable, "-m", "pip", "index", "versions", package_name]
+        cmd_version = ["pip", "index", "versions", package_name]
 
         # check if the latest version is already installed
 
@@ -272,5 +268,5 @@ class PackageManager:
                 return True, ""
             else:
                 return False, ""
-        
-        return False,""
+
+        return False, ""
