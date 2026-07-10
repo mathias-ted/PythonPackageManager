@@ -4,8 +4,7 @@ version = "0.1.0"
 description = "GUI package manager for Python "
 requires-python = ">=3.10"
 dependencies = [
-    "customtkinter>=5.2.2",
-    "uv>=0.1.0",
+    "customtkinter>=5.2.2"   
 ]
 
 [project.scripts]
