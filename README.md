@@ -28,13 +28,6 @@ Install in editable mode:
 uv pip install -e .
 ```
 
-<<<<<<< HEAD
-Run Application
-
-```sh
-uv run pkgr
-```
-=======
 ## ▶️ Usage
 
 Run the application:
@@ -46,4 +39,3 @@ uv run pkgr
 **Note:** `pkgr` detects its execution context automatically:
 - If run inside an activated virtual environment, it manages packages for that environment.
 - If run in the global/system environment, it manages global packages instead.
->>>>>>> 47a12d6 (docs: fix README formatting, install command, and usage clarity)
